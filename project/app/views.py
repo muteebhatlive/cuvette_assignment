@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-@login_required
+@login_required 
 def dashboard(request):
     username = request.user.username
     welcome_message = f"Welcome, {username}!"
@@ -54,18 +54,24 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-
+        print(email)
+        print(password)
         # Check if the username_or_email is an email
         if '@' in email:
-            obj = User.objects.get(email=email)
-            print(obj)
-            user = authenticate(request, username= obj.username, password=password)
-            print('1')
+            print('@')
+            try:
+                obj = User.objects.get(email=email)
+                print(obj)
+                user = authenticate(request, username= obj.username, password=password)
+                print('1')
+            except:
+                return render(request, 'login.html', {'error': 'Invalid email or password.'})
         else:
-            user = authenticate(request, username=email, password=password)
-            print('2')
-        print(user)
-        print(user.username)
+            try:
+                user = authenticate(request, username=email, password=password)
+                print('2')
+            except:
+                pass
         
         print('username is correct')
         if user is not None:
