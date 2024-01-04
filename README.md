@@ -6,7 +6,7 @@ Run Server
 ```
 ## URLS
 ```bash
-http://127.0.0.1:8000 : Regsiter
+http://127.0.0.1:8000 : Register
 http://127.0.0.1:8000/login : Login
 http://127.0.0.1:8000/dashboard : Dashboard
 http://127.0.0.1:8000/profile : Profile
